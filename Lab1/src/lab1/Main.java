@@ -72,7 +72,7 @@ public class Main {
 		} else if (beveStr.equals("decaf mocha")) {
 			order = new DecafMocha();
 			((CoffeeBeverage) order).setSize(disArr[i]);
-			order = new Milk(order);
+			order = new Chocolate(order);
 		} else {
 			System.out.println("Illegal input: " + beveStr);
 			return;
