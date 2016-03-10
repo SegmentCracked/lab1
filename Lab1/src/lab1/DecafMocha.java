@@ -3,11 +3,11 @@ package lab1;
  * add new type of coffee-decaf mocha
  * created by Zheyu Lu on 2016/3/10
  * */
-public class DecafMocha extends CoffeeBeverage {
+public class DecafMocha extends Decaf {
 	private String description;
-	
+	private Chocolate chocolate=new Chocolate(new Decaf());
 	public DecafMocha() {
-		description = "Decaf Mocha";
+		description = super.getDescription()+" Mocha";
 	}
 	
 	public String getDescription() {
@@ -15,6 +15,6 @@ public class DecafMocha extends CoffeeBeverage {
 	}
 
 	public double cost() {
-		return super.cost() + 1.0;
+		return super.cost() + chocolate.cost();
 	}
 }
