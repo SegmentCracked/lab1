@@ -69,6 +69,10 @@ public class Main {
 			order = new RedTea();
 			((TeaBeverage) order).setSize(disArr[i]);
 			order = new Milk(order);
+		} else if (beveStr.equals("decaf mocha")) {
+			order = new DecafMocha();
+			((CoffeeBeverage) order).setSize(disArr[i]);
+			order = new Chocolate(order);
 		} else {
 			System.out.println("Illegal input: " + beveStr);
 			return;
