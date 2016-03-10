@@ -23,7 +23,7 @@ public class EspressoTest {
         Assert.assertEquals(1.7,espresso.cost(),0);
         espresso.setSize("large");
         Assert.assertEquals(2,espresso.cost(),0);
-        espresso.setSize("grant");
+        espresso.setSize("grande");
         Assert.assertEquals(2.3,espresso.cost(),0);
     }
 
