@@ -1,5 +1,8 @@
 package lab1;
-/*add new type of coffee*/
+/*
+ * add new type of coffee-decaf mocha
+ * created by Zheyu Lu on 2016/3/10
+ * */
 public class DecafMocha extends CoffeeBeverage {
 	private String description;
 	
