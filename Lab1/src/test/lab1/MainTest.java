@@ -70,9 +70,9 @@ public class MainTest {
         Assert.assertTrue(trimSame(cout.toString(), "The total cost of your order is: 2.8"));
         cout.reset();
         args[0] = "0";
-        args[1] = "medium";
+        args[2] = "medium";
         Main.main(args);
-        Assert.assertTrue(trimSame(cout.toString(), "The total cost of your order is: 0.0"));
+        Assert.assertEquals(cout.toString().trim(), "The total cost of your order is: 0.0");
         cout.reset();
         args = new String[4];
         args[0] = "5";

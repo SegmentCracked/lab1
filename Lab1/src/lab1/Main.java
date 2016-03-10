@@ -3,10 +3,27 @@ package lab1;
 import java.text.DecimalFormat;
 
 public class Main {
+	private static void outputOrderCost(double totalCost) {
+		DecimalFormat df = new DecimalFormat(".0");
+		String valueStr = df.format(totalCost);
+		if (valueStr.equals(".0")) valueStr = "0.0";
+		System.out.println("The total cost of your order is: " + valueStr);
+	}
+
 	public static void main(String[] args) {
-		String[] disArr = new String[args.length];
-		for (int j = 0; j < args.length; j++) {
-			disArr[j] = args[j].toLowerCase();
+		//evaluate the amount
+		int amount;
+		int argumentStartPos;
+		try {
+			amount = Integer.valueOf(args[0]);
+			argumentStartPos = 1;
+		} catch (NumberFormatException e) {
+			amount = 1;
+			argumentStartPos = 0;
+		}
+		String[] disArr = new String[args.length - argumentStartPos];
+		for (int j = 0; j < disArr.length; j++) {
+			disArr[j] = args[j + argumentStartPos].toLowerCase();
 		}
 
 		int i;
@@ -106,8 +123,6 @@ public class Main {
 		}
 		// and so on...
 
-		DecimalFormat df = new DecimalFormat(".0");
-		System.out.println("The total cost of your order is: "
-				+ df.format(order.cost()));
+		outputOrderCost(order.cost() * amount);
 	}
 }
