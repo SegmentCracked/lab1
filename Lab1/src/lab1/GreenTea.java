@@ -7,7 +7,7 @@ public class GreenTea extends TeaBeverage {
 		description = "Green Tea";
 	}
 	
-	public String getDiscription() {
+	public String getDescription() {
 		return description;
 	}
 
