@@ -16,7 +16,7 @@ public class EspressoTest {
     }
 
     @Test
-    public void testEspressoCost(){
+    public void testSizeCost(){
         espresso.setSize("small");
         Assert.assertEquals(1.4,espresso.cost(),0);
         espresso.setSize("medium");
@@ -25,5 +25,10 @@ public class EspressoTest {
         Assert.assertEquals(2,espresso.cost(),0);
         espresso.setSize("grant");
         Assert.assertEquals(2.3,espresso.cost(),0);
+    }
+
+    @Test
+    public void testDescription(){
+        Assert.assertTrue(espresso.getDescription().contains("Espresso"));
     }
 }

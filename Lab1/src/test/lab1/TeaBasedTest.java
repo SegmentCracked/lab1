@@ -15,7 +15,7 @@ public class TeaBasedTest {
         tb=new TeaBased();
     }
     @Test
-    public void testTeaBased(){
+    public void testSizeCost(){
         Assert.assertEquals(0.2, tb.sizeCost("small"), 0);
         Assert.assertEquals(0.5, tb.sizeCost("medium"), 0);
         Assert.assertEquals(0.7, tb.sizeCost("large"), 0);
