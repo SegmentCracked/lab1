@@ -57,6 +57,7 @@ public class MainTest {
         args[3] = "Jasmine";
         Main.main(args);
         Assert.assertTrue(trimSame(cout.toString(), "The total cost of your order is: 2.8"));
+        cout.reset();
     }
 
     @Test
@@ -67,7 +68,7 @@ public class MainTest {
         args[1] = "ESPRESSO";
         args[2] = "small";
         Main.main(args);
-        Assert.assertTrue(trimSame(cout.toString(), "The total cost of your order is: 2.8"));
+        Assert.assertEquals(cout.toString().trim(), "The total cost of your order is: 2.8");
         cout.reset();
         args[0] = "0";
         args[2] = "medium";
@@ -90,5 +91,22 @@ public class MainTest {
         args[4] = "Jasmine";
         Main.main(args);
         Assert.assertTrue(trimSame(cout.toString(), "The total cost of your order is: 3455.2"));
+        cout.reset();
+    }
+
+    @Test
+    public void testMultiRequest() {
+        String[] args;
+        args = new String[7];
+        args[0] = "2";
+        args[1] = "ESPRESSO";
+        args[2] = "small";
+        args[3] = ";";
+        args[4] = "ESPRESSO";
+        args[5] = "lArge";
+        args[6] = "CHOcolate";
+        Main.main(args);
+        Assert.assertEquals(cout.toString().trim(), "The total cost of your order is: 5.1");
+        cout.reset();
     }
 }
