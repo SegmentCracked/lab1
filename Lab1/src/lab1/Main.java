@@ -1,12 +1,47 @@
 package lab1;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 
 public class Main {
-	public static void main(String[] args) {
-		String[] disArr = new String[args.length];
-		for (int j = 0; j < args.length; j++) {
-			disArr[j] = args[j].toLowerCase();
+	private static void outputOrderCost(double totalCost) {
+		DecimalFormat df = new DecimalFormat(".0");
+		String valueStr = df.format(totalCost);
+		if (valueStr.equals(".0")) valueStr = "0.0";
+		System.out.println("The total cost of your order is: " + valueStr);
+	}
+
+	public static String[][] argumentSplit(String []args){
+		ArrayList<Integer> semicolonPosition=new ArrayList<>();
+		for (int i=0;i<args.length;++i){
+			if (args[i].equals(";")) semicolonPosition.add(i);
+		}
+		semicolonPosition.add(args.length);
+		String ret[][]=new String[semicolonPosition.size()][];
+		int j=0;
+		for (int i=0;i<semicolonPosition.size();++i){
+			ret[i]=new String[semicolonPosition.get(i)-j];
+			for (int k=0;j<semicolonPosition.get(i);++j,++k){
+				ret[i][k]=args[j];
+			}
+			j=semicolonPosition.get(i)+1;
+		}
+		return ret;
+	}
+	public static OrderItem getOrderFromArgument(String[] args) throws IllegalInputException, ArgumentMissingException{
+		//evaluate the amount
+		int amount;
+		int argumentStartPos;
+		try {
+			amount = Integer.valueOf(args[0]);
+			argumentStartPos = 1;
+		} catch (NumberFormatException e) {
+			amount = 1;
+			argumentStartPos = 0;
+		}
+		String[] disArr = new String[args.length - argumentStartPos];
+		for (int j = 0; j < disArr.length; j++) {
+			disArr[j] = args[j + argumentStartPos].toLowerCase();
 		}
 
 		int i;
@@ -16,8 +51,7 @@ public class Main {
 				break;
 
 		if (i >= disArr.length) {
-			System.out.println("Must set a size!");
-			return;
+			throw new ArgumentMissingException("Must set a size!");
 		}
 
 		String beveStr;
@@ -73,8 +107,7 @@ public class Main {
 			((CoffeeBeverage) order).setSize(disArr[i]);
 			order = new Chocolate(order);
 		} else {
-			System.out.println("Illegal input: " + beveStr);
-			return;
+			throw new IllegalInputException(beveStr);
 		}
 
 		for (i++; i < disArr.length; i++) {
@@ -90,7 +123,7 @@ public class Main {
 				i++;
 				order = new WhipCream(order);
 			} else {
-				System.out.println("Illegal input: " + disArr[i]);
+				throw new IllegalInputException(disArr[i]);
 			}
 		}
 
@@ -104,9 +137,24 @@ public class Main {
 			((Espresso) order).getDescription();
 		}
 		// and so on...
-
-		DecimalFormat df = new DecimalFormat(".0");
-		System.out.println("The total cost of your order is: "
-				+ df.format(order.cost()));
+		return new OrderItem(order,amount);
+	}
+	public static void main(String[] args) {
+		String request[][]=argumentSplit(args);
+		OrderItem orderItems[]=new OrderItem[request.length];
+		double totalCost=0;
+		try {
+			for (int i = 0; i < request.length; ++i) {
+				orderItems[i]=getOrderFromArgument(request[i]);
+				totalCost+=orderItems[i].cost();
+			}
+		}catch (IllegalInputException e){
+			System.out.println("Illegal input: "+e.getInputStr());
+			return ;
+		} catch (ArgumentMissingException e){
+			System.out.println(e.getMessage());
+			return ;
+		}
+		outputOrderCost(totalCost);
 	}
 }

@@ -19,13 +19,13 @@ public class RedTeaTest {
     @Test
     public void testSizeCost(){
         tea.setSize("small");
-        Assert.assertEquals(1.0,tea.cost(),0);
+        Assert.assertEquals(1.0,tea.cost(),1e-8);
         tea.setSize("medium");
-        Assert.assertEquals(1.3,tea.cost(),0);
+        Assert.assertEquals(1.3,tea.cost(),1e-8);
         tea.setSize("large");
-        Assert.assertEquals(1.5,tea.cost(),0);
-        tea.setSize("grant");
-        Assert.assertEquals(1.7,tea.cost(),0);
+        Assert.assertEquals(1.5,tea.cost(),1e-8);
+        tea.setSize("grande");
+        Assert.assertEquals(1.7,tea.cost(),1e-8);
     }
 
     @Test

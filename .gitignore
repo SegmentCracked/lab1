@@ -13,4 +13,4 @@ hs_err_pid*
 
 # IntelliJ Project file
 .idea
-*.iml
+*.iml/Lab1/

@@ -24,7 +24,7 @@ public class HouseBlendTest {
         Assert.assertEquals(1.5,houseBlend.cost(),1e-8);
         houseBlend.setSize("large");
         Assert.assertEquals(1.8,houseBlend.cost(),1e-8);
-        houseBlend.setSize("grant");
+        houseBlend.setSize("grande");
         Assert.assertEquals(2.1,houseBlend.cost(),1e-8);
     }
 
