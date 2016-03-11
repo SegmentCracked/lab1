@@ -26,7 +26,6 @@ public class Main {
 		} else {
 			beveStr = disArr[0];
 		}
-
 		Beverage order;
 		if (beveStr.equals("espresso")) {
 			order = new CoffeeBeverage();
