@@ -4,6 +4,10 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class Main {
+	/**
+	 * Output the total cost to System.out
+	 * @param totalCost
+     */
 	private static void outputOrderCost(double totalCost) {
 		DecimalFormat df = new DecimalFormat(".0");
 		String valueStr = df.format(totalCost);
@@ -11,6 +15,11 @@ public class Main {
 		System.out.println("The total cost of your order is: " + valueStr);
 	}
 
+	/**
+	 * Split arguments into array of String[] by ";"
+	 * @param args
+	 * @return a array of String[]. Each item is a list of arguments.
+     */
 	public static String[][] argumentSplit(String []args){
 		ArrayList<Integer> semicolonPosition=new ArrayList<>();
 		for (int i=0;i<args.length;++i){
@@ -28,6 +37,33 @@ public class Main {
 		}
 		return ret;
 	}
+
+	/**
+	 * Find size argument in the arguments.
+	 * @param disArr
+	 * @return the index of size argument.
+	 * @throws ArgumentMissingException
+     */
+	private static int getSizeArgumentPosition(String disArr[]) throws ArgumentMissingException{
+		int i;
+		for (i = 0; i < disArr.length; i++)
+			if (disArr[i].equals("small") || disArr[i].equals("medium")
+					|| disArr[i].equals("large") || disArr[i].equals("grande"))
+				break;
+
+		if (i >= disArr.length) {
+			throw new ArgumentMissingException("Must set a size!");
+		}
+		return i;
+	}
+
+	/**
+	 * Parse the arguments into an OrderItem
+	 * @param args a array of arguments
+	 * @return an OrderItem object of the command
+	 * @throws IllegalInputException
+	 * @throws ArgumentMissingException
+     */
 	public static OrderItem getOrderFromArgument(String[] args) throws IllegalInputException, ArgumentMissingException{
 		//evaluate the amount
 		int amount;
@@ -43,74 +79,27 @@ public class Main {
 		for (int j = 0; j < disArr.length; j++) {
 			disArr[j] = args[j + argumentStartPos].toLowerCase();
 		}
-
-		int i;
-		for (i = 0; i < disArr.length; i++)
-			if (disArr[i].equals("small") || disArr[i].equals("medium")
-					|| disArr[i].equals("large"))
-				break;
-
-		if (i >= disArr.length) {
-			throw new ArgumentMissingException("Must set a size!");
-		}
-
+		int sizeArgPos= getSizeArgumentPosition(disArr);
 		String beveStr;
-		if (i == 2) {
+		if (sizeArgPos == 2) {
 			beveStr = disArr[0] + " " + disArr[1];
 		} else {
 			beveStr = disArr[0];
 		}
-		Beverage order;
-		if (beveStr.equals("espresso")) {
-			order = new CoffeeBeverage();
-			order = new Espresso();
-			((CoffeeBeverage) order).setSize(disArr[i]);
-		} else if (beveStr.equals("houseblend")) {
-			order = new CoffeeBeverage();
-			order = new HouseBlend();
-			((CoffeeBeverage) order).setSize(disArr[i]);
-		} else if (beveStr.equals("mocha")) {
-			order = new Espresso();
-			((CoffeeBeverage) order).setSize(disArr[i]);
-			order = new Chocolate(order);
-		} else if (beveStr.equals("latte")) {
-			order = new Espresso();
-			((CoffeeBeverage) order).setSize(disArr[i]);
-			order = new Milk(order);
-		} else if (beveStr.equals("cappuccino")) {
-			order = new Espresso();
-			((CoffeeBeverage) order).setSize(disArr[i]);
-			order = new WhipCream(order);
-		} else if (beveStr.equals("green tea")) {
-			order = new GreenTea();
-			((TeaBeverage) order).setSize(disArr[i]);
-		} else if (beveStr.equals("red tea")) {
-			order = new RedTea();
-			((TeaBeverage) order).setSize(disArr[i]);
-		} else if (beveStr.equals("white tea")) {
-			order = new WhiteTea();
-			((TeaBeverage) order).setSize(disArr[i]);
-		} else if (beveStr.equals("flower tea")) {
-			order = new GreenTea();
-			((TeaBeverage) order).setSize(disArr[i]);
-			order = new Jasmine(order);
-		} else if (beveStr.equals("ginger tea")) {
-			order = new GreenTea();
-			((TeaBeverage) order).setSize(disArr[i]);
-			order = new Ginger(order);
-		} else if (beveStr.equals("tea latte")) {
-			order = new RedTea();
-			((TeaBeverage) order).setSize(disArr[i]);
-			order = new Milk(order);
-		} else if (beveStr.equals("decaf mocha")) {
-			order = new DecafMocha();
-			((CoffeeBeverage) order).setSize(disArr[i]);
-			order = new Chocolate(order);
-		} else {
+
+		Beverage order= null;
+		try {
+			order = BeverageFactory.getInstance().createBeverage(beveStr);
+		} catch (BeverageNotFoundException e) {
 			throw new IllegalInputException(beveStr);
+		} catch (Exception e){
+			System.out.println("Fatal error while finding beverage: ");
+			e.printStackTrace();
+			System.exit(1);
 		}
 
-		for (i++; i < disArr.length; i++) {
+		order.setSize(disArr[sizeArgPos]);
+		for (int i=sizeArgPos+1; i < disArr.length; i++) {
 			if (disArr[i].equals("chocolate")) {
 				order = new Chocolate(order);
 			} else if (disArr[i].equals("ginger")) {

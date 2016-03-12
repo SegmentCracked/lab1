@@ -11,7 +11,12 @@ public class BeverageWithIngredient extends Beverage {
 	public String getDescription(){
 		return description;
 	}
-	
+
+	@Override
+	public void setSize(String size) {
+		drink.setSize(size);
+	}
+
 	public double cost() {
 		return drink.cost();
 	}

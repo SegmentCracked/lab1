@@ -78,10 +78,10 @@ public class MainTest {
         args = new String[4];
         args[0] = "5";
         args[1] = "ESPRESSO";
-        args[2] = "lArge";
+        args[2] = "Grande";
         args[3] = "CHOcolate";
         Main.main(args);
-        Assert.assertTrue(trimSame(cout.toString(), "The total cost of your order is: 11.5"));
+        Assert.assertEquals(cout.toString().trim(), "The total cost of your order is: 13.0");
         cout.reset();
         args = new String[5];
         args[0] = "1234";
