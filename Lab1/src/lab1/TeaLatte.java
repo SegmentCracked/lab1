@@ -3,11 +3,11 @@ package lab1;
  * add new type of gingertea
  * created by Kaiqi Xu on 2016/3/12
  * */
-public class Tealatte extends RedTea {
+public class TeaLatte extends RedTea {
 	private String description;
 	private RedTea redtea;
 	private Milk milk;
-	public Tealatte() {
+	public TeaLatte() {
 		redtea = new RedTea();
 		milk =new Milk(redtea);
 		description = "Tea Latte";
