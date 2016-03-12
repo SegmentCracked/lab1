@@ -31,6 +31,7 @@ public class BeverageFactory {
         registerBeverage("flower tea",FlowerTea.class);
         registerBeverage("ginger tea",GingerTea.class);
         registerBeverage("tea latte", TeaLatte.class);
+        registerBeverage("decaf", Decaf.class);
         registerBeverage("decaf mocha", DecafMocha.class);
         registerBeverage("decaf latte", DecafLatte.class);
         registerBeverage("decaf cappuccino", DecafCappuccino.class);

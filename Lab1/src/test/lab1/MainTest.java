@@ -58,6 +58,15 @@ public class MainTest {
         Main.main(args);
         Assert.assertTrue(trimSame(cout.toString(), "The total cost of your order is: 2.8"));
         cout.reset();
+        args = new String[5];
+        args[0] = "ESPRESSO";
+        args[1] = "lArge";
+        args[2] = "CHOcolate";
+        args[3] = "whip";
+        args[4] = "cream";
+        Main.main(args);
+        Assert.assertEquals(cout.toString().trim(), "The total cost of your order is: 2.6");
+        cout.reset();
     }
 
     @Test

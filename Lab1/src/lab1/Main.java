@@ -1,5 +1,6 @@
 package lab1;
 
+import java.lang.reflect.InvocationTargetException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
@@ -90,6 +91,11 @@ public class Main {
 		Beverage order= null;
 		try {
 			order = BeverageFactory.getInstance().createBeverage(beveStr);
+			order.setSize(disArr[sizeArgPos]);
+			for (int i = sizeArgPos + 1; i < disArr.length; i++) {
+				order=IngredientFactory.getInstance().createIngredient(disArr[i], order);
+				if (disArr[i].equals("whip")) i++;
+			}
 		} catch (BeverageNotFoundException e) {
 			throw new IllegalInputException(beveStr);
 		} catch (Exception e){
@@ -97,25 +103,6 @@ public class Main {
 			e.printStackTrace();
 			System.exit(1);
 		}
-
-		order.setSize(disArr[sizeArgPos]);
-		for (int i=sizeArgPos+1; i < disArr.length; i++) {
-			if (disArr[i].equals("chocolate")) {
-				order = new Chocolate(order);
-			} else if (disArr[i].equals("ginger")) {
-				order = new Ginger(order);
-			} else if (disArr[i].equals("milk")) {
-				order = new Milk(order);
-			} else if (disArr[i].equals("jasmine")) {
-				order = new Jasmine(order);
-			} else if (disArr[i].equals("whip")) {
-				i++;
-				order = new WhipCream(order);
-			} else {
-				throw new IllegalInputException(disArr[i]);
-			}
-		}
-
 		/**
 		 * How do I get the description of each order instead of doing this
 		 * stupid thing forever (except for printing the args)?
