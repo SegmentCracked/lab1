@@ -93,8 +93,9 @@ public class Main {
 			order = BeverageFactory.getInstance().createBeverage(beveStr);
 			order.setSize(disArr[sizeArgPos]);
 			for (int i = sizeArgPos + 1; i < disArr.length; i++) {
-				order=IngredientFactory.getInstance().createIngredient(disArr[i], order);
-				if (disArr[i].equals("whip")) i++;
+				BeverageWithIngredient orderTmp=IngredientFactory.getInstance().createIngredient(disArr[i], order);
+				i+=orderTmp.getNameSpaceCount();
+				order=orderTmp;
 			}
 		} catch (BeverageNotFoundException e) {
 			throw new IllegalInputException(beveStr);
