@@ -5,8 +5,11 @@ package lab1;
  * */
 public class DecafMocha extends Decaf {
 	private String description;
-	private Chocolate chocolate=new Chocolate(new Decaf());
+	private Decaf decaf;
+	private Chocolate chocolate;
 	public DecafMocha() {
+		decaf = new Decaf();
+		chocolate =new Chocolate(decaf);
 		description = super.getDescription()+" Mocha";
 	}
 	
@@ -14,7 +17,12 @@ public class DecafMocha extends Decaf {
 		return description;
 	}
 
+	@Override
+	public void setSize(String size) {
+		decaf.setSize(size);
+	}
+
 	public double cost() {
-		return super.cost() + chocolate.cost();
+		return chocolate.cost();
 	}
 }

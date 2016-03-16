@@ -23,12 +23,12 @@ public class DecafMochaTest {
         Assert.assertEquals(1.5,decafMocha.cost(),0);
         decafMocha.setSize("large");
         Assert.assertEquals(1.8,decafMocha.cost(),0);
-        decafMocha.setSize("grant");
+        decafMocha.setSize("grande");
         Assert.assertEquals(2.1,decafMocha.cost(),0);
     }
 
     @Test
     public void testDescription(){
-        Assert.assertTrue(decafMocha.getDescription().contains("DecafMocha"));
+        Assert.assertTrue(decafMocha.getDescription().contains("Decaf Mocha"));
     }
 }

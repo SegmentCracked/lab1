@@ -24,7 +24,7 @@ public class DecafTest {
         Assert.assertEquals(1.2,decaf.cost(),0);
         decaf.setSize("large");
         Assert.assertEquals(1.5 ,decaf.cost(),0);
-        decaf.setSize("grant");
+        decaf.setSize("grande");
         Assert.assertEquals(1.8,decaf.cost(),0);
     }
 

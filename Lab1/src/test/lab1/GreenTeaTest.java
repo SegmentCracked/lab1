@@ -23,7 +23,7 @@ public class GreenTeaTest {
         Assert.assertEquals(1.5,tea.cost(),0);
         tea.setSize("large");
         Assert.assertEquals(1.7,tea.cost(),0);
-        tea.setSize("grant");
+        tea.setSize("grande");
         Assert.assertEquals(1.9,tea.cost(),0);
     }
 

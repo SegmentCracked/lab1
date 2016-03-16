@@ -4,6 +4,7 @@ public class WhipCream extends BeverageWithIngredient {
 	public WhipCream(Beverage drink) {
 		super(drink);
 		description += " whip";
+		setNameSpaceCount(1);
 	}
 
 	public double cost() {
