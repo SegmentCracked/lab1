@@ -21,7 +21,7 @@ public class TeaBased implements SizeFactor {
 			Scanner input = new Scanner(new File("sizeTea.txt"));
 			while (input.hasNextLine()) {
 				String sizeName = input.next();
-				int cost = input.nextInt();
+				double cost = input.nextDouble();
 				sizeList.add(new Size(sizeName, cost));
 			}
 			input.close();

@@ -42,7 +42,7 @@ public class CoffeeBased implements SizeFactor {
 			Scanner input = new Scanner(new File("sizeCoffee.txt"));
 			while (input.hasNextLine()) {
 				String sizeName = input.next();
-				int cost = input.nextInt();
+				double cost = input.nextDouble();
 				sizeList.add(new Size(sizeName, cost));
 			}
 			input.close();
