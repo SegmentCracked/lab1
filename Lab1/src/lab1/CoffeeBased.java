@@ -38,18 +38,10 @@ public class CoffeeBased implements SizeFactor {
 	@Override
 	public double sizeCost(String size) {
 		sizeList = new ArrayList();
-		try {
-			Scanner input = new Scanner(new File("sizeCoffee.txt"));
-			while (input.hasNextLine()) {
-				String sizeName = input.next();
-				double cost = input.nextDouble();
-				sizeList.add(new Size(sizeName, cost));
-			}
-			input.close();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		sizeList.add(new Size("small", 0.4));
+		sizeList.add(new Size("medium", 0.7));
+		sizeList.add(new Size("large", 1.0));
+		sizeList.add(new Size("grande", 1.3));
 		for (int i = 0; i < sizeList.size(); i++) {
 			if (sizeList.get(i).getSize().toLowerCase().equals(size)) {
 				return sizeList.get(i).getCost();
@@ -63,13 +55,4 @@ public class CoffeeBased implements SizeFactor {
 		 */
 		return 0;
 	}
-
-	public void setSize(String size, double cost) throws IOException {
-		Size newSize = new Size(size, cost);
-		FileOutputStream fs = new FileOutputStream(new File("sizeCoffee.txt"));
-		PrintStream p = new PrintStream(fs);
-		p.println(newSize.getSize() + " " + newSize.getCost());
-		fs.close();
-	}
-
 }
